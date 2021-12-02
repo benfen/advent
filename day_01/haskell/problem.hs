@@ -1,4 +1,3 @@
-import Data.Binary.Get (isEmpty)
 import Data.List.Split
 import System.IO
 
