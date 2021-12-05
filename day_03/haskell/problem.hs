@@ -1,4 +1,3 @@
-import Data.Graph.Inductive.Internal.Heap (build)
 import Data.List.Split
 import System.IO
 
