@@ -9,8 +9,6 @@ namespace c_sharp
             int currentCalories = 0;
             int highestNumberOfCalories = 0;
 
-
-
             for (int i = 0; i < listLengthForIndex; i++) {
                 if (fileContents[i] == string.Empty) {
                     highestNumberOfCalories = currentCalories;
