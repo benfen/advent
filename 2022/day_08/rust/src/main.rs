@@ -55,6 +55,8 @@ impl Forest {
                     higher_than += higher_than_stack.pop().unwrap().1 + 1;
                 }
 
+                // This is super ugly, but it serves to increment the amount of trees someone can see
+                // iff there is still a tree left in their line of sight (read the stack is not empty)
                 mutate(
                     item,
                     (
