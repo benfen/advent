@@ -34,6 +34,7 @@ func main() {
 	}
 
 	fmt.Println("Part 1:", getVisibleTrees(forest))
+	fmt.Println("Part 2:", getScenicScore(forest))
 }
 
 func getVisibleTrees(forest [][]int) int {
@@ -95,4 +96,48 @@ func getVisibleTrees(forest [][]int) int {
 	}
 
 	return trees
+}
+
+func getScenicScore(forest [][]int) int {
+	bestScore := 0
+
+	for i := 1; i < len(forest)-1; i++ {
+		for j := 1; j < len(forest[0])-1; j++ {
+			height := forest[i][j]
+			left, right, up, down := 0, 0, 0, 0
+			for x := j + 1; x < len(forest[0]); x++ {
+				right++
+				if forest[i][x] >= height {
+					break
+				}
+			}
+
+			for x := j - 1; x > -1; x-- {
+				left++
+				if forest[i][x] >= height {
+					break
+				}
+			}
+
+			for y := i + 1; y < len(forest); y++ {
+				up++
+				if forest[y][j] >= height {
+					break
+				}
+			}
+
+			for y := i - 1; y > -1; y-- {
+				down++
+				if forest[y][j] >= height {
+					break
+				}
+			}
+			score := left * right * up * down
+			if score > bestScore {
+				bestScore = score
+			}
+		}
+	}
+
+	return bestScore
 }
