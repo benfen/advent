@@ -1,3 +1,4 @@
 **/rust/target/**
 .vscode
 **/target/**
+node_modules
