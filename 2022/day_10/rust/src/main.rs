@@ -1,4 +1,4 @@
-use std::{collections::HashSet, fs};
+use std::fs;
 
 fn main() {
     let input: String =
@@ -6,7 +6,7 @@ fn main() {
 
     let lines: Vec<&str> = input.split("\n").filter(|x| *x != "").collect();
 
-    let mut signal_strength = 0;
+    let mut signal_strength: i64 = 0;
     let mut cycle: i64 = 0;
     let mut value: i64 = 1;
     let mut sprites = Vec::new();
