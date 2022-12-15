@@ -11,5 +11,7 @@ members = [
   "2022/day_10/rust",
   "2022/day_11/rust",
   "2022/day_12/rust",
+    "2022/day_14/rust",
+    "2022/day_15/rust",
 ]
 
