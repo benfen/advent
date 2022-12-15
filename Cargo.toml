@@ -1,13 +1,15 @@
 [workspace]
 members = [
-    "2022/day_03/rust",
-    "2022/day_04/rust",
-    "2022/day_05/rust",
-    "2022/day_06/rust",
-    "2022/day_07/rust",
-    "2022/day_08/rust",
-    "2022/day_09/rust",
-    "2022/day_10/rust",
-    "2022/day_11/rust",
-    "2022/day_12/rust",
+  "2022/day_01/chris-rust",
+  "2022/day_03/rust",
+  "2022/day_04/rust",
+  "2022/day_05/rust",
+  "2022/day_06/rust",
+  "2022/day_07/rust",
+  "2022/day_08/rust",
+  "2022/day_09/rust",
+  "2022/day_10/rust",
+  "2022/day_11/rust",
+  "2022/day_12/rust",
 ]
+
