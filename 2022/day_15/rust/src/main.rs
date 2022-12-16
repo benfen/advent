@@ -35,6 +35,18 @@ fn manhattan_distance(a: [i64; 2], b: [i64; 2]) -> i64 {
     (a[0] - b[0]).abs() + (a[1] - b[1]).abs()
 }
 
+fn generate_ring(distance: i64) -> Vec<[i64; 2]> {
+    let mut ring = Vec::new();
+    for i in 0..distance {
+        ring.push([i, distance - i]);
+        ring.push([distance - i, -i]);
+        ring.push([-i, -(distance - i)]);
+        ring.push([-(distance - i), i]);
+    }
+
+    ring
+}
+
 struct BeaconRow {
     beacons: HashSet<i64>,
     range: Vec<[i64; 2]>,
@@ -129,6 +141,41 @@ impl BeaconRow {
 
         count
     }
+
+    fn find_missing_beacon(&self, beacon_pairs: &[[[i64; 2]; 2]]) -> [i64; 2] {
+        for i in 0..beacon_pairs.len() {
+            let b = beacon_pairs[i];
+
+            let ring: Vec<[i64; 2]> = generate_ring(manhattan_distance(b[0], b[1]) + 1)
+                .iter()
+                .map(|[x, y]| [b[0][0] + x, b[0][1] + y])
+                .collect();
+
+            let mut index = 0;
+            'inner: loop {
+                if index >= ring.len() {
+                    break;
+                }
+                let r = ring[index];
+                if r[0] < 0 || r[0] > 4_000_000 || r[1] < 0 || r[1] > 4_000_000 {
+                    index += 1;
+                    continue;
+                }
+
+                for beacon_pair in beacon_pairs.iter() {
+                    if manhattan_distance(beacon_pair[0], r)
+                        <= manhattan_distance(beacon_pair[0], beacon_pair[1])
+                    {
+                        index += 1;
+                        continue 'inner;
+                    }
+                }
+                return ring[index];
+            }
+        }
+
+        panic!("Didn't find a solution")
+    }
 }
 
 fn main() {
@@ -165,9 +212,11 @@ fn main() {
         .collect();
 
     let mut beacon_row = BeaconRow::new(2000000);
-    for line in lines {
+    for line in &lines {
         beacon_row.add_beacon_pair(line[0], line[1]);
     }
 
     println!("Part 1: {}", beacon_row.count_invalid_positions());
+    let mb = beacon_row.find_missing_beacon(&lines);
+    println!("Part 2: {}", mb[0] * 4_000_000 + mb[1]);
 }
